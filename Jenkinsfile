@@ -21,7 +21,7 @@ pipeline {
 
                     docker run -d \
                       --name profile \
-                      -p 8989:8080 \
+                      -p 8989:80 \
                       --restart unless-stopped \
                       ptrungduc1011/profile:v1
                 '''
