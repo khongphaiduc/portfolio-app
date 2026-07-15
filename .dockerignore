@@ -1,0 +1,10 @@
+node_modules
+dist
+.git
+.gitignore
+.dockerignore
+Dockerfile
+npm-debug.log
+README.md
+extract_cv.*
+scratch_cv_text.txt
