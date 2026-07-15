@@ -3,6 +3,7 @@ import avatarImg from './assets/avatar.png';
 import project1Img from './assets/project1.png';
 import project2Img from './assets/project2.png';
 import cvPdf from './assets/PhamTrungDuc_Fresher_DEV.pdf';
+import notFoundImg from './assets/notfound.jpg';
 import './App.css';
 
 // SVG Icons
@@ -93,12 +94,48 @@ function App() {
   const [openProjectIndex, setOpenProjectIndex] = useState(null);
   // CV Modal state
   const [showCvModal, setShowCvModal] = useState(false);
+  // 404 Routing fallback state
+  const [is404, setIs404] = useState(false);
 
   // Typing effect variables
   const titles = ['Backend Engineer', 'Software Engineer', 'System Architecture Enthusiast'];
   const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
   const [currentText, setCurrentText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
+
+  // Check route path initially and on state changes
+  useEffect(() => {
+    const handleLocationChange = () => {
+      const path = window.location.pathname;
+      if (path !== '/' && path !== '') {
+        setIs404(true);
+      } else {
+        setIs404(false);
+      }
+    };
+
+    handleLocationChange();
+
+    window.addEventListener('popstate', handleLocationChange);
+
+    const originalPushState = window.history.pushState;
+    window.history.pushState = function(...args) {
+      originalPushState.apply(this, args);
+      handleLocationChange();
+    };
+
+    const originalReplaceState = window.history.replaceState;
+    window.history.replaceState = function(...args) {
+      originalReplaceState.apply(this, args);
+      handleLocationChange();
+    };
+
+    return () => {
+      window.removeEventListener('popstate', handleLocationChange);
+      window.history.pushState = originalPushState;
+      window.history.replaceState = originalReplaceState;
+    };
+  }, []);
 
 
 
@@ -273,6 +310,33 @@ function App() {
       ]
     }
   ];
+
+  if (is404) {
+    return (
+      <div className="not-found-container">
+        <div className="mouse-glow"></div>
+        <div className="ambient-glow glow-1"></div>
+        <div className="ambient-glow glow-2"></div>
+        <div className="not-found-card glass-card animate-fade-in">
+          <div className="not-found-img-wrapper">
+            <img src={notFoundImg} alt="404 Not Found" className="not-found-img" />
+          </div>
+          <h2 className="not-found-subtitle">Page Not Found</h2>
+          <p className="not-found-desc">
+            The page you are looking for does not exist or has been moved. Please return to the homepage.
+          </p>
+          <button 
+            onClick={() => {
+              window.history.pushState(null, '', '/');
+            }} 
+            className="btn btn-primary"
+          >
+            Go Back Home
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
