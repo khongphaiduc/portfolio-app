@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import avatarImg from './assets/avatar.png';
 import project1Img from './assets/project1.png';
 import project2Img from './assets/project2.png';
-import cvPdf from './assets/PhamTrungDuc_Fresher_DEV.pdf';
+import cvPdf from './assets/PhamTrungDuc_Fresher_NET.pdf';
 import notFoundImg from './assets/notfound.jpg';
 import './App.css';
 
@@ -443,7 +443,7 @@ function App() {
                 <button onClick={() => setShowCvModal(true)} className="btn btn-secondary" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
                   <EyeIcon /> View CV
                 </button>
-                <a href={cvPdf} download="PhamTrungDuc_Fresher_DEV.pdf" className="btn btn-secondary" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
+                <a href={cvPdf} download="PhamTrungDuc_Fresher_NET.pdf" className="btn btn-secondary" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
                   <DownloadIcon /> Download CV (PDF)
                 </a>
               </div>
@@ -693,7 +693,7 @@ function App() {
               <div className="cv-modal-actions">
                 <a
                   href={cvPdf}
-                  download="PhamTrungDuc_Fresher_DEV.pdf"
+                  download="PhamTrungDuc_Fresher_NET.pdf"
                   className="btn-icon"
                   title="Download CV"
                 >
