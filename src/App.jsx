@@ -119,13 +119,13 @@ function App() {
     window.addEventListener('popstate', handleLocationChange);
 
     const originalPushState = window.history.pushState;
-    window.history.pushState = function(...args) {
+    window.history.pushState = function (...args) {
       originalPushState.apply(this, args);
       handleLocationChange();
     };
 
     const originalReplaceState = window.history.replaceState;
-    window.history.replaceState = function(...args) {
+    window.history.replaceState = function (...args) {
       originalReplaceState.apply(this, args);
       handleLocationChange();
     };
@@ -228,14 +228,15 @@ function App() {
       title: 'Food Ordering Microservices',
       period: 'Dec 2025 - Present',
       description: 'A food ordering system designed using Microservices architecture and Domain-Driven Design (DDD) principles. Provides an application decoupling solution that enables independent scalability of core services with high reliability.',
-      tags: ['ASP.NET Core', 'gRPC', 'EF Core', 'Elasticsearch', 'Redis', 'RabbitMQ', 'SignalR', 'ReactJS'],
+      tags: ['ASP.NET Core', 'gRPC', 'EF Core', 'Redis', 'RabbitMQ', 'SignalR', 'ReactJS'],
       beLink: 'https://github.com/khongphaiduc/food-ordering-microservices-ddd',
       feLink: 'https://github.com/khongphaiduc/food-ordering-microservices-frontend',
       image: project1Img,
       deepDive: [
-        'Built an AI-based personalized food recommendation engine utilizing user interaction logs (views, cart events).',
-        'Leveraged Elasticsearch to provide intelligent autocompletion search suggestions, increasing search accuracy and relevance.',
-        'Developed a real-time order state management system using SignalR to instantly synchronize order updates between customers and the kitchen staff.'
+        'Implemented an AI-based personalized recommendation engine utilizing data from user interactions.',
+        'Developed an inventory deduction service in a microservices architecture using atomic database updates to prevent race conditions and overselling under concurrent requests.',
+        'Implemented PayOS webhook integration to automatically verify payment results and synchronize order status, ensuring reliable payment confirmation and reducing manual intervention.',
+        'Developed a real-time order management system with SignalR, allowing staff to instantly receive and handle new orders, significantly improving operational responsiveness.'
       ]
     },
     {
@@ -274,7 +275,6 @@ function App() {
         { name: 'SQL Server', detail: 'Relational DB management & Tuning', icon: <DatabaseIcon /> },
         { name: 'PostgreSQL', detail: 'Open-source object-relational database', icon: <DatabaseIcon /> },
         { name: 'Redis Cache & Lock', detail: 'Distributed locks, session & cache memory', icon: <DatabaseIcon /> },
-        { name: 'Elasticsearch', detail: 'Enterprise search engine & logging', icon: <DatabaseIcon /> }
       ]
     },
     {
@@ -325,10 +325,10 @@ function App() {
           <p className="not-found-desc">
             The page you are looking for does not exist or has been moved. Please return to the homepage.
           </p>
-          <button 
+          <button
             onClick={() => {
               window.history.pushState(null, '', '/');
-            }} 
+            }}
             className="btn btn-primary"
           >
             Go Back Home
