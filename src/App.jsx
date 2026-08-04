@@ -549,7 +549,6 @@ function App() {
                   Pursuing a Bachelor's degree in Software Engineering, building a strong foundation in data structures, algorithms, databases, computer networking, and system analysis.
                 </p>
                 <ul className="timeline-bullets">
-                  <li>Current Cumulative GPA: 3.0 / 4.0</li>
                   <li>Language Proficiency Certification: IELTS 6.0 (2025)</li>
                   <li>Conducted in-depth research on Software Architecture and Distributed Systems design.</li>
                 </ul>
