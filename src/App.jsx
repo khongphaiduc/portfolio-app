@@ -438,9 +438,9 @@ function App() {
 
               <div className="hero-btns">
                 <a href="#contact" className="btn btn-primary">Contact Me</a>
-                <button onClick={() => setShowCvModal(true)} className="btn btn-secondary" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
+                <a href={cvPdf} target="_blank" rel="noopener noreferrer" className="btn btn-secondary" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
                   <EyeIcon /> View CV
-                </button>
+                </a>
                 <a href={cvPdf} download="PhamTrungDuc_Fresher_NET.pdf" className="btn btn-secondary" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
                   <DownloadIcon /> Download CV (PDF)
                 </a>
