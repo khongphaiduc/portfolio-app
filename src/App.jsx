@@ -434,9 +434,7 @@ function App() {
                 I am a <span className="gradient-text">{currentText}</span>
                 <span className="cursor" style={{ color: 'var(--accent-primary)', animation: 'blink 0.8s infinite' }}>|</span>
               </h2>
-              <p className="hero-desc">
-                Software Engineer specializing in <strong>Backend</strong> systems. Focused on designing data optimization, distributed caching, message queues, and high-performance Microservices architectures.
-              </p>
+              <p className="hero-desc"> Software Engineer specializing in <strong>Backend</strong> development, with a focus on building scalable APIs, optimizing data access, and working with caching, message queues, and Microservices architectures. </p>
 
               <div className="hero-btns">
                 <a href="#contact" className="btn btn-primary">Contact Me</a>
@@ -512,11 +510,7 @@ function App() {
                 <p className="timeline-desc">
                   Developed and managed commercial web systems for multiple clients, focusing on scalable backend architectures and leading development teams.
                 </p>
-                <ul className="timeline-bullets">
-                  <li>Consulted directly with clients to translate business requirements into system design, API contracts, and database architectures.</li>
-                  <li>Managed and led development teams (3-5 members), organizing tasks, conducting code reviews, and ensuring project delivery using Agile methodologies.</li>
-                  <li>Built and deployed containerized RESTful APIs, payment gateways (VNPAY, PayOS), and notification pipelines using .NET Core, PostgreSQL, Redis, and Docker.</li>
-                </ul>
+                <ul className="timeline-bullets"> <li>Worked with clients to understand requirements and design APIs and database structures.</li> <li>Worked in a 3-5 member team, assigned tasks, reviewed code, and followed Agile practices.</li> <li>Developed and deployed RESTful APIs, payment integrations (VNPAY, PayOS), and notification services using .NET Core, PostgreSQL, Redis, and Docker.</li> </ul>
               </div>
             </div>
 
