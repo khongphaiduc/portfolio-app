@@ -518,16 +518,16 @@ function App() {
             <div className="timeline-item right">
               <div className="timeline-dot"></div>
               <div className="timeline-card glass-card">
-                <span className="timeline-date">Jan 2026 - Apr 2026</span>
-                <h3 className="timeline-title">Intern Backend Developer</h3>
+                <span className="timeline-date">Sep 2025 - Apr 2026</span>
+                <h3 className="timeline-title">Back End Developer</h3>
                 <span className="timeline-subtitle">FPT Software</span>
                 <p className="timeline-desc">
-                  Participated as an intern in real-world projects at Vietnam's leading software exporter. Gained hands-on experience in a professional Agile/Scrum environment.
+                  Participated in real-world projects at Vietnam's leading software exporter. Gained hands-on experience in a professional Agile/Scrum environment.
                 </p>
                 <ul className="timeline-bullets">
-                  <li>Collaborated in Agile sprints, directly participating in daily stand-ups, sprint planning, and iterative feature delivery.</li>
-                  <li><strong>Project: Talent Acquisition System (TAS)</strong></li>
-                  <li>Designed and implemented the automatic interview scheduling feature using Redis Distributed Locking to prevent resource race conditions and double bookings in a high-concurrency environment.</li>
+                  <li>Implemented interview scheduling feature using Redis distributed locking to prevent race conditions and double booking in a high-concurrency environment.</li>
+                  <li>Maintained and improved existing code to ensure system stability and support new feature requirements.</li>
+                  <li>Participated in Agile-based development, collaborating in sprints, daily stand-ups, and iterative feature delivery.</li>
                 </ul>
               </div>
             </div>
