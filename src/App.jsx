@@ -102,8 +102,6 @@ function App() {
   const [openProjectIndex, setOpenProjectIndex] = useState(null);
   // Mobile experience details accordion state
   const [expandedMobileExp, setExpandedMobileExp] = useState({});
-  // CV Modal state
-  const [showCvModal, setShowCvModal] = useState(false);
   // 404 Routing fallback state
   const [is404, setIs404] = useState(false);
 
@@ -204,17 +202,6 @@ function App() {
     }
   }, [theme]);
 
-  // Disable body scroll when modal is open
-  useEffect(() => {
-    if (showCvModal) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, [showCvModal]);
 
   // Track mouse coordinates for background spotlight effect
   useEffect(() => {
@@ -493,14 +480,15 @@ function App() {
 
               <div className="hero-btns">
                 <a href="#contact" className="btn btn-primary">Contact Me</a>
-                <button
-                  type="button"
-                  onClick={() => setShowCvModal(true)}
+                <a
+                  href={cvPdf}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="btn btn-secondary"
                   style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}
                 >
                   <EyeIcon /> View CV
-                </button>
+                </a>
                 <a href={cvPdf} download="PhamTrungDuc_NET.pdf" className="btn btn-secondary" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
                   <DownloadIcon /> Download CV (PDF)
                 </a>
@@ -777,62 +765,6 @@ function App() {
           </p>
         </div>
       </footer>
-
-      {showCvModal && (
-        <div className="cv-modal-overlay" onClick={() => setShowCvModal(false)}>
-          <div className="cv-modal-content glass-card" onClick={(e) => e.stopPropagation()}>
-            <div className="cv-modal-header">
-              <h3 className="cv-modal-title">Pham Trung Duc - Curriculum Vitae</h3>
-              <div className="cv-modal-actions">
-                <a
-                  href={cvPdf}
-                  download="PhamTrungDuc_NET.pdf"
-                  className="btn-icon"
-                  title="Download CV"
-                >
-                  <DownloadIcon />
-                </a>
-                <a
-                  href={cvPdf}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-icon"
-                  title="Open in New Tab"
-                >
-                  <ExternalLinkIcon />
-                </a>
-                <button
-                  className="btn-icon close-btn"
-                  onClick={() => setShowCvModal(false)}
-                  title="Close"
-                >
-                  <CloseIcon />
-                </button>
-              </div>
-            </div>
-            <div className="cv-modal-body">
-              <iframe
-                src={`${cvPdf}#toolbar=0`}
-                title="Pham Trung Duc CV"
-                width="100%"
-                height="100%"
-                style={{ border: 'none' }}
-              />
-              <div className="cv-modal-mobile-fallback">
-                <p>PDF preview might not load on some mobile devices.</p>
-                <a
-                  href={cvPdf}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-primary"
-                >
-                  Open CV in New Tab
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </>
   );
 }
