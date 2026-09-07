@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import avatarImg from './assets/avatar.png';
-import project1Img from './assets/project1.png';
+import avatarImg from './assets/avatar.jpg';
+import project1Img from './assets/image.png';
 import project2Img from './assets/project2.png';
-import cvPdf from './assets/PhamTrungDuc_Fresher_NET.pdf';
+import cvPdf from './assets/PhamTrungDuc_NET.pdf';
 import notFoundImg from './assets/notfound.jpg';
 import './App.css';
 
@@ -83,6 +83,14 @@ const CloseIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" x2="6" y1="6" y2="18" /><line x1="6" x2="18" y1="6" y2="18" /></svg>
 );
 
+const ChevronDownIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9" /></svg>
+);
+
+const FlagIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" /><line x1="4" x2="4" y1="22" y2="15" /></svg>
+);
+
 function App() {
   // Theme state
   const [theme, setTheme] = useState('dark');
@@ -92,10 +100,60 @@ function App() {
   const [activeSection, setActiveSection] = useState('home');
   // Dynamic project details tracking (expandable accordion)
   const [openProjectIndex, setOpenProjectIndex] = useState(null);
+  // Mobile experience details accordion state
+  const [expandedMobileExp, setExpandedMobileExp] = useState({});
   // CV Modal state
   const [showCvModal, setShowCvModal] = useState(false);
   // 404 Routing fallback state
   const [is404, setIs404] = useState(false);
+
+  const toggleMobileExp = (index) => {
+    setExpandedMobileExp((prev) => ({
+      ...prev,
+      [index]: !prev[index]
+    }));
+  };
+
+  const experiences = [
+    {
+      stage: '01',
+      date: 'May 2026 - Present',
+      title: 'Freelancer Backend Developer',
+      subtitle: 'Independent Contractor & Project Manager',
+      description: 'Developed and managed commercial web systems for multiple clients, focusing on scalable backend architectures and leading development teams.',
+      bullets: [
+        'Worked with clients to understand requirements and design APIs and database structures.',
+        'Worked in a 3-5 member team, assigned tasks, reviewed code, and followed Agile practices.',
+        'Developed and deployed RESTful APIs, payment integrations (VNPAY, PayOS), and notification services using .NET Core, PostgreSQL, Redis, and Docker.'
+      ],
+      position: 'left'
+    },
+    {
+      stage: '02',
+      date: 'Sep 2025 - April 2026',
+      title: 'Back End Developer - FPT Software',
+      subtitle: 'FPT Software',
+      description: "Participated in real-world projects at Vietnam's leading software exporter. Gained hands-on experience in a professional Agile/Scrum environment.",
+      bullets: [
+        'Built and maintained RESTful APIs to support features and seamless client-side integration',
+        'Maintained and improved existing code to ensure system stability and support new feature requirements',
+        'Participated in Agile-based development, collaborating in sprints, daily stand-ups, and iterative feature delivery.'
+      ],
+      position: 'right'
+    },
+    {
+      stage: '03',
+      date: '2022 - 2026',
+      title: 'Software Engineering - FPT University',
+      subtitle: 'FPT University',
+      description: "Completed a Bachelor's degree in Software Engineering, building a strong foundation in data structures, algorithms, databases, computer networking, and system analysis.",
+      bullets: [
+        'Language Proficiency Certification: IELTS 6.0 (2025)',
+        'Conducted in-depth research on Software Architecture and Distributed Systems design.'
+      ],
+      position: 'left'
+    }
+  ];
 
   // Typing effect variables
   const titles = ['Backend Engineer', 'Software Engineer', 'System Architecture Enthusiast'];
@@ -136,8 +194,6 @@ function App() {
       window.history.replaceState = originalReplaceState;
     };
   }, []);
-
-
 
   // Handle dark/light theme
   useEffect(() => {
@@ -221,8 +277,6 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-
-
   const projects = [
     {
       title: 'Food Ordering Microservices',
@@ -231,6 +285,7 @@ function App() {
       tags: ['ASP.NET Core', 'gRPC', 'EF Core', 'Redis', 'RabbitMQ', 'SignalR', 'ReactJS'],
       beLink: 'https://github.com/khongphaiduc/food-ordering-microservices-ddd',
       feLink: 'https://github.com/khongphaiduc/food-ordering-microservices-frontend',
+      productLink: 'https://foodly.mom/',
       image: project1Img,
       deepDive: [
         'Implemented an AI-based personalized recommendation engine utilizing data from user interactions.',
@@ -438,10 +493,15 @@ function App() {
 
               <div className="hero-btns">
                 <a href="#contact" className="btn btn-primary">Contact Me</a>
-                <a href={cvPdf} target="_blank" rel="noopener noreferrer" className="btn btn-secondary" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
+                <button
+                  type="button"
+                  onClick={() => setShowCvModal(true)}
+                  className="btn btn-secondary"
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}
+                >
                   <EyeIcon /> View CV
-                </a>
-                <a href={cvPdf} download="PhamTrungDuc_Fresher_NET.pdf" className="btn btn-secondary" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
+                </button>
+                <a href={cvPdf} download="PhamTrungDuc_NET.pdf" className="btn btn-secondary" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
                   <DownloadIcon /> Download CV (PDF)
                 </a>
               </div>
@@ -499,54 +559,68 @@ function App() {
           <h2 className="section-title">Experience & Education</h2>
           <p className="section-subtitle">My professional journey and academic foundation.</p>
 
-          <div className="timeline">
-            {/* Freelancer Item */}
-            <div className="timeline-item left">
-              <div className="timeline-dot"></div>
-              <div className="timeline-card glass-card">
-                <span className="timeline-date">May 2026 - Present</span>
-                <h3 className="timeline-title">Freelancer Backend Developer</h3>
-                <span className="timeline-subtitle">Independent Contractor & Project Manager</span>
-                <p className="timeline-desc">
-                  Developed and managed commercial web systems for multiple clients, focusing on scalable backend architectures and leading development teams.
-                </p>
-                <ul className="timeline-bullets"> <li>Worked with clients to understand requirements and design APIs and database structures.</li> <li>Worked in a 3-5 member team, assigned tasks, reviewed code, and followed Agile practices.</li> <li>Developed and deployed RESTful APIs, payment integrations (VNPAY, PayOS), and notification services using .NET Core, PostgreSQL, Redis, and Docker.</li> </ul>
-              </div>
-            </div>
+          {/* Unified Winding Roadmap View (Desktop, Tablet & Mobile) */}
+          <div className="winding-roadmap-wrapper">
+            <svg className="winding-svg-canvas" viewBox="0 0 900 650" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="roadmapGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="var(--accent-primary)" stopOpacity="0.85" />
+                  <stop offset="50%" stopColor="var(--accent-secondary)" stopOpacity="1" />
+                  <stop offset="100%" stopColor="var(--accent-primary)" stopOpacity="0.85" />
+                </linearGradient>
+              </defs>
+              <path
+                d="M 450,40 Q 780,120 450,280 Q 120,440 450,600"
+                fill="none"
+                stroke="url(#roadmapGradient)"
+                strokeWidth="4"
+                strokeDasharray="8 8"
+                className="winding-path-animated"
+              />
+            </svg>
 
-            {/* Experience Item */}
-            <div className="timeline-item right">
-              <div className="timeline-dot"></div>
-              <div className="timeline-card glass-card">
-                <span className="timeline-date">Sep 2025 - Apr 2026</span>
-                <h3 className="timeline-title">Back End Developer</h3>
-                <span className="timeline-subtitle">FPT Software</span>
-                <p className="timeline-desc">
-                  Participated in real-world projects at Vietnam's leading software exporter. Gained hands-on experience in a professional Agile/Scrum environment.
-                </p>
-                <ul className="timeline-bullets">
-                  <li>Implemented interview scheduling feature using Redis distributed locking to prevent race conditions and double booking in a high-concurrency environment.</li>
-                  <li>Maintained and improved existing code to ensure system stability and support new feature requirements.</li>
-                  <li>Participated in Agile-based development, collaborating in sprints, daily stand-ups, and iterative feature delivery.</li>
-                </ul>
-              </div>
-            </div>
+            <div className="roadmap-stages">
+              {experiences.map((exp, idx) => {
+                const isExpanded = !!expandedMobileExp[idx];
+                return (
+                  <div key={idx} className={`roadmap-stage-item stage-${idx + 1} ${exp.position}`}>
+                    <div className="roadmap-node flag-node">
+                      <div className="flag-icon-wrapper">
+                        <FlagIcon />
+                      </div>
+                    </div>
 
-            {/* Education Item */}
-            <div className="timeline-item left">
-              <div className="timeline-dot"></div>
-              <div className="timeline-card glass-card">
-                <span className="timeline-date">2022 - Present</span>
-                <h3 className="timeline-title">Software Engineering</h3>
-                <span className="timeline-subtitle">FPT University</span>
-                <p className="timeline-desc">
-                  Pursuing a Bachelor's degree in Software Engineering, building a strong foundation in data structures, algorithms, databases, computer networking, and system analysis.
-                </p>
-                <ul className="timeline-bullets">
-                  <li>Language Proficiency Certification: IELTS 6.0 (2025)</li>
-                  <li>Conducted in-depth research on Software Architecture and Distributed Systems design.</li>
-                </ul>
-              </div>
+                    <div
+                      className={`roadmap-card glass-card ${isExpanded ? 'is-expanded' : ''}`}
+                      onClick={() => toggleMobileExp(idx)}
+                    >
+                      <div className="roadmap-card-header">
+                        <span className="timeline-date">{exp.date}</span>
+                      </div>
+
+                      <div className="roadmap-card-title-row">
+                        <h3 className="timeline-title">{exp.title}</h3>
+                        <span className={`chevron-icon ${isExpanded ? 'open' : ''}`}>
+                          <ChevronDownIcon />
+                        </span>
+                      </div>
+
+                      {/* Expandable details revealed on click */}
+                      {isExpanded && (
+                        <div className="roadmap-card-body animate-fade-in">
+                          <span className="timeline-subtitle">{exp.subtitle}</span>
+                          <p className="timeline-desc">{exp.description}</p>
+                          <ul className="timeline-bullets">
+                            {exp.bullets.map((bullet, bIdx) => (
+                              <li key={bIdx}>{bullet}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -566,6 +640,11 @@ function App() {
                   <div className="project-img-wrapper">
                     <img src={project.image} alt={project.title} className="project-img" />
                     <div className="project-overlay">
+                      {project.productLink && (
+                        <a href={project.productLink} target="_blank" rel="noopener noreferrer" className="social-btn" aria-label="Live Product Website" title="Live Product: foodly.mom">
+                          WEB
+                        </a>
+                      )}
                       {project.beLink && (
                         <a href={project.beLink} target="_blank" rel="noopener noreferrer" className="social-btn" aria-label="Backend Repository">
                           BE
@@ -597,6 +676,27 @@ function App() {
                     </div>
 
                     <p className="project-desc">{project.description}</p>
+
+                    {project.productLink && (
+                      <div style={{ marginTop: '0.25rem' }}>
+                        <a
+                          href={project.productLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '0.4rem',
+                            fontSize: '0.9rem',
+                            fontWeight: 600,
+                            color: 'var(--accent-primary)',
+                            textDecoration: 'none'
+                          }}
+                        >
+                          <ExternalLinkIcon /> Live Product: foodly.mom
+                        </a>
+                      </div>
+                    )}
 
                     {/* Accordion Toggle */}
                     <button
@@ -686,7 +786,7 @@ function App() {
               <div className="cv-modal-actions">
                 <a
                   href={cvPdf}
-                  download="PhamTrungDuc_Fresher_NET.pdf"
+                  download="PhamTrungDuc_NET.pdf"
                   className="btn-icon"
                   title="Download CV"
                 >
